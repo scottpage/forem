@@ -9,12 +9,9 @@ class ProfileField < ApplicationRecord
     color_field: 3
   }
 
-  # NOTE: @citizen428 We need to remove settings_only from here once the user
-  # settings work gets merged. Maybe we can even get rid of this enum altogether.
   enum display_area: {
     header: 0,
-    left_sidebar: 1,
-    settings_only: 2
+    left_sidebar: 1
   }
 
   belongs_to :profile_field_group, optional: true
