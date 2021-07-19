@@ -7,7 +7,14 @@ RSpec.shared_examples "a profile field" do
 
       it { is_expected.to validate_presence_of(:label) }
       it { is_expected.to validate_uniqueness_of(:label).case_insensitive }
-      it { is_expected.to validate_presence_of(:attribute_name).on(:update) }
+      it { is_expected.to validate_presence_of(:attribute_name) }
+
+      Profile::STATIC_FIELDS.each do |column|
+        it "does not allow #{column} as profile field attribute" do
+          profile_field = ProfileField.create(label: "Test", attribute_name: column)
+          expect(profile_field).not_to be_valid
+        end
+      end
     end
   end
 
